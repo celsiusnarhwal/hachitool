@@ -184,7 +184,7 @@ hachitool.error("this is an error message")
 
 ### `hachitool.fail`
 
-Optionally prints an error-level message, then fails the workflow. Takes an optional `exit_code` argument
+Optionally print an error-level message, then fail the workflow. Takes an optional `exit_code` argument
 that must be an integer greater than or equal to 1. Additionally takes all arguments of `hachitool.error`,
 except `message` is optional.
 
