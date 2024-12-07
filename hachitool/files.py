@@ -1,10 +1,11 @@
 import os
+import typing as t
 from enum import StrEnum
 from pathlib import Path
-import typing as t
+from types import SimpleNamespace
 
 from multimethod import multimethod
-from pydantic import validate_call, ConfigDict
+from pydantic import ConfigDict, validate_call
 
 __all__ = ["set_output", "set_env", "add_path", "summary"]
 
@@ -15,9 +16,13 @@ class File(StrEnum):
     PATH = "PATH"
     SUMMARY = "STEP_SUMMARY"
 
-    def write(self, content: str):
-        fp = Path(os.getenv("GITHUB_" + self.value))
-        fp.open("a", newline="\n").write(content)
+    @property
+    def file(self):
+        return Path(os.getenv(f"GITHUB_{self.value}"))
+
+    @validate_call(config=ConfigDict(coerce_numbers_to_str=True))
+    def write(self, content: str, append: bool = True):
+        self.file.open("a" if append else "w", newline="\n").write(content)
 
 
 @multimethod
@@ -49,6 +54,20 @@ def add_path(path: Path):
     File.PATH.write(str(path))
 
 
-@validate_call(config=ConfigDict(coerce_numbers_to_str=True))
-def summary(content: str):
-    File.SUMMARY.write(content)
+class Summary(SimpleNamespace):
+    @staticmethod
+    def add(content: str):
+        File.SUMMARY.write(content)
+
+    @staticmethod
+    def overwrite(content: str):
+        File.SUMMARY.write(content, append=False)
+
+    @staticmethod
+    def clear():
+        File.SUMMARY.file.unlink(missing_ok=True)
+
+    __call__ = add
+
+
+summary = Summary
