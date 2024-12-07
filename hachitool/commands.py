@@ -82,7 +82,7 @@ def mask(value: t.Any):
 
 
 @contextmanager
-@validate_call
+@validate_call(config=ConfigDict(coerce_numbers_to_str=True))
 def log_group(title: str):
     print(f"::group::{title}")
     yield
