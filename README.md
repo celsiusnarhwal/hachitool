@@ -111,7 +111,7 @@ hachitool.summary("this is a summary")
 
 > [!TIP]
 > Calling `hachitool.summary` directly is does the same thing:
-> ```python
+>   ```python
     import hachitool
     
     hachitool.summary("this is a summary")
