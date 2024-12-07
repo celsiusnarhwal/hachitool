@@ -56,12 +56,8 @@ def add_path(path: Path):
 
 class Summary(SimpleNamespace):
     @staticmethod
-    def add(content: str):
-        File.SUMMARY.write(content)
-
-    @staticmethod
-    def overwrite(content: str):
-        File.SUMMARY.write(content, append=False)
+    def add(content: str, overwrite: bool = False):
+        File.SUMMARY.write(content, append=overwrite)
 
     @staticmethod
     def clear():

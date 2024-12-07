@@ -116,14 +116,12 @@ hachitool.summary.add("this is a summary")
 > hachitool.summary("this is a summary")
 > ```
 
-### `hachitool.summary.overwrite`
-
-Add content to the step summary, erasing any existing content.
+If the `overwrite` argument is `True`, existing summary content will be erased:
 
 ```python
 import hachitool
 
-hachitool.summary.overwrite("this is a summary")
+hachitool.summary.add("this is a summary", overwrite=True)
 ```
 
 ### `hachitool.summary.clear`
