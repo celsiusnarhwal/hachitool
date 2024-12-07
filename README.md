@@ -198,7 +198,7 @@ hachitool.fail("something went wrong", exit_code=1)
 
 ### `hachitool.log_group`
 
-Anything printed to the log inside this context manager will be printed as
+Anything printed to the log inside this context manager will be nested in an
 an [expandable group](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#grouping-log-lines).
 
 Takes a mandatory `title` argument.
