@@ -170,7 +170,7 @@ hachitool.log("notice", "this is a notic message", file="main.py", line=(1, 5), 
 
 ### `hachitool.debug`, `hachitool.notice`, `hachitool.warning`, `hachitool.error`
 
-Print a `debug`, `notice`, `warning`, or `error` message to the console, respectively. Takes all arguments of
+Print a `debug`, `notice`, `warning`, or `error` message to the log, respectively. Takes all arguments of
 `hachitool.log` except for `level`.
 
 ```python
