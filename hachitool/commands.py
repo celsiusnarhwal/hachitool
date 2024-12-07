@@ -3,7 +3,7 @@ import uuid
 from contextlib import contextmanager
 
 import pydantic.alias_generators
-from pydantic import Field, validate_call
+from pydantic import Field, validate_call, ConfigDict
 
 __all__ = [
     "log",
@@ -19,6 +19,8 @@ __all__ = [
 
 
 class LogParams(t.TypedDict, total=False):
+    __pydantic_config__ = ConfigDict(coerce_numbers_to_str=True)
+
     title: str
     file: str
     line: int | tuple[int, int]
