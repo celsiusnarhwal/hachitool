@@ -4,7 +4,7 @@ from pathlib import Path
 import typing as t
 
 from multimethod import multimethod
-from pydantic import validate_call
+from pydantic import validate_call, ConfigDict
 
 __all__ = ["set_output", "set_env", "add_path", "summary"]
 
@@ -49,6 +49,6 @@ def add_path(path: Path):
     File.PATH.write(str(path))
 
 
-@validate_call
+@validate_call(config=ConfigDict(coerce_numbers_to_str=True))
 def summary(content: str):
     File.SUMMARY.write(content)
