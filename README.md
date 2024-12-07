@@ -177,7 +177,7 @@ Takes a mandatory `title` argument.
 ```python
 import hachitool
 
-with hachitool.log_group("group title"):
+with hachitool.log_group(title="group title"):
     print("I'm part of a log group!")
     print("me too!")
     print("me three!")
