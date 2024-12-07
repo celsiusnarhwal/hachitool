@@ -4,7 +4,7 @@ Hachitool is a set of utilities that make it easier to work with Python scripts 
 
 ## Installation
 
-Hachitool can be installed persistently like any other Python package:
+Hachitool can be installed like any other Python package:
 
 ```yaml
 - run: pip install hachitool
