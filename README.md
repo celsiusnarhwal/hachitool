@@ -97,13 +97,21 @@ import hachitool
 hachitool.add_path("/absolute/or/relative/path")
 ```
 
-### `hachitool.summary`
+### `hachitool.summary.add`
 
 Add content to
 the [step summary](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary).
-You can call this function multiple times; the result is cumulative. Content added to the summary cannot be removed.
+You can call this function multiple times; the result is cumulative.
 
 ```python
+import hachitool
+
+hachitool.summary("this is a summary")
+```
+
+> [!TIP]
+> Calling `hachitool.summary` directly is does the same thing:
+> ```python
 import hachitool
 
 hachitool.summary("this is a summary")
