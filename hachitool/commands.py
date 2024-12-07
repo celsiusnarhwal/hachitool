@@ -27,7 +27,7 @@ class LogParams(t.TypedDict, total=False):
     column: int | tuple[int, int]
 
 
-@validate_call
+@validate_call(config=ConfigDict(coerce_numbers_to_str=True))
 def log(
     level: t.Literal["debug", "notice", "warning", "error"],
     message: str,
