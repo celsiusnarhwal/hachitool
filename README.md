@@ -55,7 +55,8 @@ import hachitool
 
 ### `hachitool.set_output`
 
-Set output for a step. Takes either:
+[Set output parameters for a step](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#setting-an-output-parameter).
+Takes either:
 
 - a key as its first argument and a value as its second
 - a set of key-value pairs as either a dictionary or keyword arguments
@@ -71,7 +72,8 @@ hachitool.set_output(key="value")
 
 ### `hachitool.set_env`
 
-Set environment variables. Takes either:
+[Set environment variables](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#setting-an-environment-variable).
+Takes either:
 
 - a key as its first argument and a value as its second
 - a set of key-value pairs as either a dictionary or keyword arguments
