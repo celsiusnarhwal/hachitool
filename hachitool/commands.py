@@ -75,11 +75,12 @@ def fail(
     exit(exit_code)
 
 
-def mask(value: str):
+def mask(value: t.Any):
     print(f"::add-mask::{value}")
 
 
 @contextmanager
+@validate_call
 def log_group(title: str):
     print(f"::group::{title}")
     yield
