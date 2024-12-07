@@ -192,11 +192,10 @@ Nothing printed to the log inside this context manager will be interpreted as a 
 ```python
 import hachitool
 
+hachitool.warning("this is a warning message to show that commands are being processed")
+
 with hachitool.literal():
-    hachitool.mask("this doesn't work properly because GitHub won't interpret it as a workflow command")
-    hachitool.debug("neither does this")
-    hachitool.notice("or this")
-    hachitool.warning("or this")
-    hachitool.error("or this")
-    hachitool.fail("this will still fail the workflow but the error message won't print correctly")
+    hachitool.warning("this will not render as a warning because commands are not being processed")
+
+hachitool.warning("this will render as a warning since commands are being processed again")
 ```
