@@ -5,7 +5,17 @@ from contextlib import contextmanager
 import pydantic.alias_generators
 from pydantic import Field, validate_call
 
-__all__ = ["log", "debug", "notice", "warning", "error", "fail", "mask", "log_group", "literal"]
+__all__ = [
+    "log",
+    "debug",
+    "notice",
+    "warning",
+    "error",
+    "fail",
+    "mask",
+    "log_group",
+    "literal",
+]
 
 
 class LogParams(t.TypedDict, total=False):
@@ -21,7 +31,6 @@ def log(
     message: str,
     **params: t.Unpack[LogParams],
 ):
-
     for key in ["line", "column"]:
         if isinstance(params.get(key), tuple):
             params[key], params[f"end_{key}"] = params[key]
@@ -57,7 +66,9 @@ def error(message: str, **params):
     log("error", message, **params)
 
 
-def fail(message: str = None, /, exit_code: t.Annotated[int, Field(ge=1)] = 1, **params):
+def fail(
+    message: str = None, /, exit_code: t.Annotated[int, Field(ge=1)] = 1, **params
+):
     if message:
         error(message, **params)
 
@@ -82,4 +93,3 @@ def literal():
     print(f"::stop-commands::{signal}")
     yield
     print(f"::{signal}::")
-
