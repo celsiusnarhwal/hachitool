@@ -111,11 +111,11 @@ hachitool.summary("this is a summary")
 
 > [!TIP]
 > Calling `hachitool.summary` directly is does the same thing:
->   ```python
-    import hachitool
-    
-    hachitool.summary("this is a summary")
-    ```
+> ```python
+> import hachitool
+>    
+> hachitool.summary("this is a summary")
+> ```
 
 ### `hachitool.mask`
 
