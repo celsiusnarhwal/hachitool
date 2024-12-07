@@ -4,7 +4,7 @@ Hachitool is a set of utilities that make it easier to work with Python scripts 
 
 ## Installation
 
-Hachitool can be installed persistently like any other Python package:
+Hachitool can be installed like any other Python package:
 
 ```yaml
 - run: pip install hachitool
@@ -196,8 +196,8 @@ hachitool.fail("something went wrong", exit_code=1)
 
 ### `hachitool.log_group`
 
-Anything printed to the log inside this context manager will be printed as
-an [expandable group](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#grouping-log-lines).
+Anything printed to the log inside this context manager will be nested inside an
+[expandable group](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#grouping-log-lines).
 
 Takes a mandatory `title` argument.
 
