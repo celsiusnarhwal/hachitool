@@ -116,7 +116,7 @@ hachitool.summary.add("this is a summary")
 > hachitool.summary("this is a summary")
 > ```
 
-If the `overwrite` argument is `True`, existing summary content will be erased:
+If the keyword-only `overwrite` argument is `True`, existing summary content will be erased:
 
 ```python
 import hachitool
