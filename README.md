@@ -101,6 +101,7 @@ hachitool.add_path("/absolute/or/relative/path")
 
 Add content to
 the [step summary](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary).
+Supports [GitHub-flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
 ```python
 import hachitool
