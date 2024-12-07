@@ -1,0 +1,200 @@
+# Hachitool
+
+Hachitool is a set of utilities that make it easier to work with Python scripts in GitHub Actions.
+
+## Installation
+
+Hachitool can be installed persistently like any other Python package:
+
+```shell
+pip install hachitool
+```
+
+### Inline scripts
+
+Hachitool can be ephemerally installed for inline Python scripts via [uv](https://docs.astral.sh/uv):
+
+```yaml
+- uses: astral-sh/setup-uv@v3
+
+- shell: uv run --with hachitool python {0}
+  run: |
+    import hachitool
+
+    # Do stuff here
+```
+
+### External scripts
+
+Hachitool can be emphemerally installed for external scripts via uv and
+[inline script metadata](https://packaging.python.org/en/latest/specifications/inline-script-metadata/#inline-script-metadata):
+
+```python
+# script.py
+
+# /// script
+# dependencies = [
+#     "hachitool",
+# ]
+# ///
+
+import hachitool
+
+# Do stuff here
+```
+
+```yaml
+# workflow.yml
+
+- uses: astral-sh/setup-uv@v3
+
+- run: uv run script.py
+```
+
+## Usage
+
+### `hachitool.set_output`
+
+Set output for a step. Takes either:
+
+- a key as its first argument and a value as its second
+- a set of key-value pairs as either a dictionary or keyword arguments
+
+```python
+import hachitool
+
+# All of these are equivalent
+hachitool.set_output("key", "value")
+hachitool.set_output({"key": "value"})
+hachitool.set_output(key="value")
+```
+
+### `hachitool.set_env`
+
+Set environment variables. Takes either:
+
+- a key as its first argument and a value as its second
+- a set of key-value pairs as either a dictionary or keyword arguments
+
+```python
+import hachitool
+
+# All of these are equivalent
+hachitool.set_env("key", "value")
+hachitool.set_env({"key": "value"})
+hachitool.set_env(key="value")
+```
+
+### `hachitool.add_path`
+
+Append something to the system path.
+
+```python
+import hachitool
+
+hachitool.add_path("/absolute/or/relative/path")
+```
+
+### `hachitool.summary`
+
+Add content to
+the [step summary](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary).
+You can call this function multiple times; the result is cumulative. Content added to the summary cannot be removed.
+
+```python
+import hachitool
+
+hachitool.summary("this is a summary")
+```
+
+### `hachitool.mask`
+
+[Mask a value](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#masking-a-value-in-a-log).
+
+```python
+import hachitool
+
+hachitool.mask("super secret value")
+```
+
+### `hachitool.log`
+
+Print a message to the log. Takes the following arguments:
+
+| **Argument** | **Type**                                            | **Description**                                                                                                             | **Required?** |
+|--------------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|---------------|
+| `level`      | `"debug"` \| `"notice"` \| `"warning"` \| `"error"` | The log level of the message.                                                                                               | Yes           |
+| `message`    | `str`                                               | The message to print.                                                                                                       | Yes           |
+| `file`       | `str`                                               | The path to a file to annotate with the message.                                                                            | No            |
+| `line`       | `int` \| `tuple[int, int]`                          | The line(s) of `file` to annotate with the message. A tuple will be interpreted as a pair of starting and ending lines.     | No            |
+| `column`     | `int` \| `tuple[int, int]`                          | The column(s) of `file` to annotate with the message. A tuple will be interpreted as a pair of starting and ending columns. | No            |                                                                                                   |          
+
+`level` and `message` are the first and second positional arguments, respectively.
+`file`, `line`, and `column` are keyword-only.
+
+```python
+import hachitool
+
+hachitool.log("notice", "this is a notice message", file="main.py", line=1, column=6)
+
+# Using tuples for `line` and `column`
+hachitool.log("notice", "this is a notic message", file="main.py", line=(1, 5), column=(6, 10))
+```
+
+### `hachitool.debug`, `hachitool.notice`, `hachitool.warning`, `hachitool.error`
+
+Print a `debug`, `notice`, `warning`, or `error` message to the console, respectively. Takes the same arguments
+as `hachitool.log` excpet for `level`.
+
+```python
+import hachitool
+
+hachitool.debug("this is a debug message")
+hachitool.notice("this is a notice message")
+hachitool.warning("this is a warning message")
+hachitool.error("this is an error message")
+```
+
+### `hachitool.fail`
+
+Optionally prints an error-level message, then fails the workflow. Takes an optional `exit_code` argument
+that must be an integer greater than or equal to 1. Additionally takes all arguments of `hachitool.error`,
+except `message` is optional.
+
+```python
+import hachitool
+
+hachitool.fail("something went wrong", exit_code=1)
+```
+
+### `hachitool.log_group`
+
+Anything printed to the log inside this context manager will be printed as
+an [expandable group](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#grouping-log-lines).
+
+Takes a mandatory `title` argument.
+
+```python
+import hachitool
+
+with hachitool.log_group("group title"):
+    print("I'm part of a log group!")
+    print("me too!")
+    print("me three!")
+```
+
+### `hachitool.literal`
+
+Nothing printed to the log inside this context manager will be interpreted as a workflow command.
+
+```python
+import hachitool
+
+with hachitool.literal():
+    hachitool.mask("this doesn't work properly because GitHub won't interpret it as a workflow command")
+    hachitool.debug("neither does this")
+    hachitool.notice("or this")
+    hachitool.warning("or this")
+    hachitool.error("or this")
+    hachitool.fail("this will still fail the workflow but the error message won't print correctly")
+```

@@ -1,0 +1,17 @@
+[project]
+name = "hachitool"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "celsius narhwal", email = "hello@celsiusnarhwal.dev" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "multimethod>=1.12",
+    "pydantic>=2.10.3",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
