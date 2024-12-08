@@ -12,6 +12,11 @@ dependencies = [
     "pydantic>=2.10.3",
 ]
 
+[project.urls]
+Repository = "https://github.com/celsiusnarhwal/hachitool"
+Issues = "https://github.com/celsiusnarhwal/hachitool/issues"
+Changelog = "https://github.com/celsiusnarhwal/hachitool/blob/main/CHANGELOG.md"
+
 [tool.pdm.version]
 source = "scm"
 
