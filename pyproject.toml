@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "celsius narhwal", email = "hello@celsiusnarhwal.dev" }
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "multimethod>=1.12",
     "pydantic>=2.10.3",
