@@ -22,7 +22,7 @@ class File(StrEnum):
 
     @validate_call(config=ConfigDict(coerce_numbers_to_str=True))
     def write(self, content: str, append: bool = True):
-        self.file.open("a" if append else "w", newline="\n").write(content)
+        print(content, file=self.file.open("a" if append else "w"))
 
 
 @multimethod
