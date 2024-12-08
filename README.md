@@ -101,6 +101,7 @@ hachitool.add_path("/absolute/or/relative/path")
 
 Add content to
 the [step summary](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary).
+Supports [GitHub-flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
 ```python
 import hachitool
@@ -170,7 +171,7 @@ hachitool.log("notice", "this is a notic message", file="main.py", line=(1, 5), 
 
 ### `hachitool.debug`, `hachitool.notice`, `hachitool.warning`, `hachitool.error`
 
-Print a `debug`, `notice`, `warning`, or `error` message to the console, respectively. Takes all arguments of
+Print a `debug`, `notice`, `warning`, or `error` message to the log, respectively. Takes all arguments of
 `hachitool.log` except for `level`.
 
 ```python
@@ -184,7 +185,7 @@ hachitool.error("this is an error message")
 
 ### `hachitool.fail`
 
-Optionally prints an error-level message, then fails the workflow. Takes an optional `exit_code` argument
+Optionally print an error-level message, then fail the workflow. Takes an optional `exit_code` argument
 that must be an integer greater than or equal to 1. Additionally takes all arguments of `hachitool.error`,
 except `message` is optional.
 
